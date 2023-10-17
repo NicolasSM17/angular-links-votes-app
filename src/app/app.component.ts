@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Link } from './link/link.model';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'angular-links-votes-app';
+  
+  links: Link[];
+
+  constructor(){
+    this.links = [
+      new Link('Angular', 'http://angular.io', 100),
+      new Link('Google', 'http://google.com', 50),
+      new Link('Facebook', 'http://facebook.com', 25)
+    ];
+  }
+
+  addLink(title: HTMLInputElement, link: HTMLInputElement){
+    this.links.push(new Link(title.value, link.value));
+    title.value = '';
+    link.value = '';
+
+    return false;
+  }
 }
